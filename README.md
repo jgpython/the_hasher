@@ -14,11 +14,11 @@
 ## Installation:
 
 1. Clone the repository:
-`git clone https://github.com/yourusername/the_hasher.git`
+`git clone https://github.com/jgpython/the_hasher/the_hasher.py`
 `cd the_hasher`
 
 2. Install the required dependencies:
 `pip install -r requirements.txt`
 
 3. Run the app:
-`python main.py`
+`python the_hasher.py`
