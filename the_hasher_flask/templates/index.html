@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Hashing Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // Automatically focus the password input field when the page loads
+        window.onload = function() {
+            document.getElementById("password_entry").focus();
+        };
+
+        // Automatically submit the form when the hash function is changed
+        function submitForm() {
+            document.getElementById("hashForm").submit();
+        }
+
+        // Function to copy hash when clicked
+        function copyHash(element) {
+            var hashValue = element.textContent;
+            navigator.clipboard.writeText(hashValue).then(function() {
+                alert("Copied hash: " + hashValue);
+            }, function(err) {
+                console.error("Could not copy text: ", err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Hashing Tool</h1>
+
+        <!-- Flash messages for errors (e.g., duplicate passwords) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Form to add passwords and select the hashing algorithm -->
+        <form method="POST" action="/" id="hashForm">
+            <div class="form-group">
+                <label for="password_entry">Enter Password:</label>
+                <input type="text" id="password_entry" name="password_entry" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hash_function">Choose Hash Function:</label>
+                <select id="hash_function" name="hash_function" onchange="submitForm()">
+                    <option value="MD5" {% if hash_function == "MD5" %}selected{% endif %}>MD5</option>
+                    <option value="SHA256" {% if hash_function == "SHA256" %}selected{% endif %}>SHA-256</option>
+                    <option value="SHA512" {% if hash_function == "SHA512" %}selected{% endif %}>SHA-512</option>
+                    <option value="SHA1" {% if hash_function == "SHA1" %}selected{% endif %}>SHA-1</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Add Password</button>
+        </form>
+
+        <!-- Table to display passwords and their corresponding hashes -->
+        {% if password_list %}
+        <h2>Hashed Passwords</h2>
+        <form method="POST" action="/remove_passwords">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Password</th>
+                        <th>Hash</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for password, hash in zip(password_list, hashed_passwords) %}
+                    <tr>
+                        <td><input type="checkbox" name="password_checkbox" value="{{ password }}"></td>
+                        <td>{{ password }}</td>
+                        <td onclick="copyHash(this)" style="cursor: pointer;">{{ hash }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn">Delete Selected</button>
+        </form>
+        {% endif %}
+
+        <div class="controls">
+            <p>Passwords: {{ password_list|length }}/{{ password_limit }}</p>
+            <a href="{{ url_for('clear_passwords') }}" class="btn">Clear All Passwords</a>
+        </div>
+    </div>
+</body>
+</html>
