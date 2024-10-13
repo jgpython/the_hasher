@@ -19,9 +19,20 @@
 - **Dynamic Table**: View and manage passwords and their corresponding hash values in a dynamic table.
 - **Save to File**: Save hashed results (either just the hash or both password and hash) to a file for easy record-keeping.
 
+## Versions
+
+### Tkinter Version
+
+This is a desktop application built using **Tkinter**, allowing users to interact with the hashing tool through a simple GUI.
+
+### Flask Version
+
+The **Flask version** provides a modern web-based interface for hashing passwords, making the tool more accessible through a browser. However, this version currently **does not support file saving or uploading passwords from a file**. It is ideal for quick password hashing tasks directly in the browser.
+
+
 ## How to Use
 
-### Option 1: Clone the Repository
+### Option 1: Tkinter Version (Desktop)
 
 1. Clone this repository to your local machine:
    
@@ -33,16 +44,27 @@
 3. Run the app:
 `python the_hasher.py`
 
-### Option 2: Download the Python file
 
-1. Download the the_hasher.py file from the repository.
+### Option 2: Flask Version (Web)
 
-2. Run the Python file:
-`python the_hasher.py`
+1. Clone the Repository:
+`git clone https://github.com/jgpython/the_hasher.git`
+
+2. Navigate to the Flask Version:
+`cd the_hasher/the_hasher_flask`
+
+3. Install Flask (if not already installed):
+`pip install Flask`
+
+4. Run the Flask App:
+`python the_hasher_flask.py`
+
+5. Access the Application:
+`Open your web browser and navigate to http://127.0.0.1:5000/`
 
 ## Requirements
 - Python 3.x is required to run the script.
-- No external dependencies are required.
+- Flask (for the web-based version) can be installed with: `pip install Flask`
 
 ## Cybersecurity Implications
 
