@@ -11,7 +11,7 @@
 
 **The Hasher** is a Python-based password hashing tool designed to help users securely hash passwords using well-known cryptographic hashing algorithms such as MD5, SHA256, SHA512, and SHA1. It provides an intuitive GUI built with Tkinter, allowing users to manually enter passwords or load them from a text file, hash them using a selected algorithm, and save the results for future use.
 
-![Screenshot](/the_hasher/screenshot2.png)
+![Screenshot](./screenshot2.png)
 
 ## Features
 
