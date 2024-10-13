@@ -27,6 +27,8 @@
 
 This is a desktop application built using **Tkinter**, allowing users to interact with the hashing tool through a simple GUI.
 
+![Screenshot](./screenshot1.png)
+
 ### Flask Version
 
 The **Flask version** provides a modern web-based interface for hashing passwords, making the tool more accessible through a browser. However, this version currently **does not support file saving or uploading passwords from a file**. It is ideal for quick password hashing tasks directly in the browser.
